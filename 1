@@ -1,0 +1,23 @@
+ListWork37°. Дан двусвязный линейный список и указатель на первый элемент этого списка. 
+Необходимо удалить в списке N-ый по счету элемент. Значение N не больше числа элементов в списке. 
+В качестве результата вывести ссылку на элемент списка, следующий за удаленным, или nil, если удаленный элемент был последним.
+
+#include <windows.h>
+#pragma hdrstop
+#include "pt4.h"
+using namespace std;
+
+void Solve()
+{
+    Task("ListWork37");
+	int N; pt >> N;
+	PNode P1; pt >> P1;
+	for (int i = 1; i < N; i++)
+		P1 = P1->Next;
+	if (P1->Prev != NULL)
+		P1->Prev->Next = P1->Next;
+	if (P1->Next != NULL)
+		P1->Next->Prev = P1->Prev;
+	PNode P2 = P1->Next; delete P1;
+	pt << P2;
+}
