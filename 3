@@ -1,0 +1,41 @@
+ListWork65°. Дан двусвязный линейный список и указатель на первый элемент этого списка. 
+Создать текстовый файл, в который вывести содержимое списка в следующем порядке: сначала последний элемент списка, 
+потом первый, далее предпоследний и второй, и т.д., в конце - элементы, находящиеся в середине списка. 
+Подсказка: после вывода очередного числа удалять его в списке. Числа выводить в одну строку, разделяя ровно одним пробелом, в конце строки пробел на ставить.
+
+#include <windows.h>
+#pragma hdrstop
+#include "pt4.h"
+#include <fstream>
+using namespace std;
+
+void Solve() {
+    Task("ListWork65");
+	PNode P1, Pn;
+	pt >> P1;
+	Pn = P1;
+	while (Pn->Next != NULL)
+		Pn = Pn->Next;
+	string fileName;
+	pt >> fileName;
+	ofstream FN;
+	FN.open(fileName, ios::out);
+	int ysl = 1;
+	while ((P1->Next != NULL) && (Pn->Prev != NULL)) {
+		if (ysl > 0) {
+			FN << Pn->Data << " ";
+			Pn = Pn->Prev;
+			Pn->Next = NULL;
+			ysl *= (-1);
+		} else {
+			FN << P1->Data << " ";
+			P1 = P1->Next;
+			P1->Prev = NULL;
+			ysl *= (-1);
+		}
+	}
+	FN << P1->Data;
+	FN.close();
+
+
+}
